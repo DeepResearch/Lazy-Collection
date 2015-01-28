@@ -13,7 +13,7 @@ import com.lazy.collection.impl.AbstractSegment;
  */
 public interface Segment<T> {
 	
-	 boolean isEmpty();
+	 	boolean isEmpty();
 
 	    T head() throws NoSuchElementException;
 	    
@@ -23,10 +23,7 @@ public interface Segment<T> {
 
 	    Segment<T> tail() throws NoSuchElementException;
 	    
-	    final static class constructors {
-	        public static <T> Segment<T> emptySegment(Class<T> aClass) {
-	            return new EmptySegment<T>();
-	        }
+	    final static class constructors {	      
 
 	        public static <T> Segment<T> emptySegment() {
 	            return new EmptySegment<T>();
@@ -44,9 +41,9 @@ public interface Segment<T> {
 	            return segment(head, tail);
 	        }
 
-	        public static <T> Segment<T> unique(T head, Segment<T> tail) {
-	            return segment(head, tail.head().equals(head) ? tail.tail() : tail);
-	        }
+//	        public static <T> Segment<T> unique(T head, Segment<T> tail) {
+//	            return segment(head, tail.head().equals(head) ? tail.tail() : tail);
+//	        }
 	    }
 	    
 	    final static class ASegment<T> extends AbstractSegment<T> {
