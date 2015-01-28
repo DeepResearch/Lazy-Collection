@@ -1,10 +1,11 @@
 # Lazy-Collection
-Non-strict (lazy) Collections for Java where one can essentially form a sequence of functions and the evaluation is only performed on request. It uses Java 7 as default jdk version.
+Non-strict (lazy) Collections for Java where one can essentially form a sequence of functions and the evaluation is only performed on demand. It uses Java 7 as default JDK version.
 
 A functional library for Java that has the following features. This library is heavily inspired from scala language.
 
  * Tries to be as lazy as possible.
  * Works with Iterable, Iterator, Arrays, etc.
+ * Primitive lazy collections
  * Many more comming soon
  
 ## Quick Start
