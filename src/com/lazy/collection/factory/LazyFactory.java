@@ -53,26 +53,18 @@ public class LazyFactory {
 	}
 	
 	public static <T> LazyCollection<T> sequence(final Iterable<T> iterable){
-		if (iterable == null) return empty();
-
-        if (iterable instanceof LazyCollection) return cast(iterable);
-
-        return new LazyCollection<T>() {
-            public final Iterator<T> iterator() {
-                return cast(iterable.iterator());
-            }
-        };
+		return sequence(iterable.iterator());
 	}
 	
 	
-	public static <T> LazyCollection<T> sequence(final Iterator<T> iterable){
-		if (iterable == null) return empty();
+	public static <T> LazyCollection<T> sequence(final Iterator<T> iterator){
+		if (iterator == null) return empty();
 
-        if (iterable instanceof LazyCollection) return cast(iterable);
+        if (iterator instanceof LazyCollection) return cast(iterator);
 
         return new LazyCollection<T>() {
             public final Iterator<T> iterator() {
-                return cast(iterable);
+                return cast(iterator);
             }
         };
 	}
