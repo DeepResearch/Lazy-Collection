@@ -6,6 +6,8 @@ import com.lazy.collection.Callable1;
 import com.lazy.collection.First;
 import com.lazy.collection.Segment;
 import com.lazy.collection.factory.LazyFactory;
+import com.lazy.primitive.TypeDoubleCallable;
+import com.lazy.primitive.impl.LazyDoubleCollection;
 
 /**
  * 
@@ -48,6 +50,10 @@ public abstract class LazyCollection<T> extends AbstractCollection<T> implements
 	
 	public <S> LazyCollection<S> map(final Callable1<? super T, ? extends S> callable){
 		return LazyFactory.map(this, callable);
+	}
+	
+	public LazyDoubleCollection mapToDouble(final TypeDoubleCallable callable){
+		return LazyFactory.mapToDouble(this, callable);
 	}
 
 }

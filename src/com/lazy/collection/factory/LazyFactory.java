@@ -10,6 +10,11 @@ import com.lazy.collection.iterators.MapIterator;
 import com.lazy.collection.iterators.factory.IteratorFactory;
 
 
+import com.lazy.primitive.TypeDoubleCallable;
+import com.lazy.primitive.impl.LazyDoubleCollection;
+import com.lazy.primitive.iterable.DoubleIterator;
+import com.lazy.primitive.iterator.TypeDoubleIterator;
+
 import static com.lazy.collection.impl.Unchecked.cast;
 
 /**
@@ -102,6 +107,17 @@ public class LazyFactory {
 			}
 			 
 		};		
+	 }
+	 
+	 public static <T> LazyDoubleCollection mapToDouble(final Iterable<? extends T> iterable, final TypeDoubleCallable callable){
+		 return new LazyDoubleCollection() {
+			
+			@SuppressWarnings("unchecked")
+			@Override
+			public DoubleIterator iterator() {
+				return new TypeDoubleIterator(iterable.iterator(), callable);
+			}
+		};
 	 }
 	 
 	 public static <T> int size(final Iterable<? extends T> iterable){
