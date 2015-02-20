@@ -3,17 +3,15 @@ package com.lazy.collection.factory;
 import java.util.Iterator;
 
 import com.lazy.collection.Callable1;
+import com.lazy.collection.Predicate;
 import com.lazy.collection.impl.LazyCollection;
 import com.lazy.collection.iterators.ArrayIterator;
 import com.lazy.collection.iterators.EmptyIterator;
+import com.lazy.collection.iterators.FilterIterator;
 import com.lazy.collection.iterators.MapIterator;
+import com.lazy.collection.iterators.TakeWhileIterator;
 import com.lazy.collection.iterators.factory.IteratorFactory;
 
-
-import com.lazy.primitive.TypeDoubleCallable;
-import com.lazy.primitive.impl.LazyDoubleCollection;
-import com.lazy.primitive.iterable.DoubleIterator;
-import com.lazy.primitive.iterator.TypeDoubleIterator;
 
 import static com.lazy.collection.impl.Unchecked.cast;
 
@@ -94,8 +92,13 @@ public class LazyFactory {
 	 }
 	 
 	 public static <T> LazyCollection<T> cons(final T t, final Iterable<? extends T> iterable){
-		 //TODO
-		 return null;
+		 return new LazyCollection<T>() {
+			@Override
+			public Iterator<T> iterator() {
+				return null;
+			}
+			 
+		};
 	 }
 	
 	 public static <T, S> LazyCollection<S> map(final Iterable<? extends T> iterable, final Callable1<? super T, ? extends S> callable){		 
@@ -109,23 +112,37 @@ public class LazyFactory {
 		};		
 	 }
 	 
-	 public static <T> LazyDoubleCollection mapToDouble(final Iterable<? extends T> iterable, final TypeDoubleCallable callable){
-		 return new LazyDoubleCollection() {
-			
-			@SuppressWarnings("unchecked")
-			@Override
-			public DoubleIterator iterator() {
-				return new TypeDoubleIterator(iterable.iterator(), callable);
-			}
-		};
-	 }
-	 
 	 public static <T> int size(final Iterable<? extends T> iterable){
 		 return IteratorFactory.size(iterable.iterator());
 	 }
 	
 	 public static <T> void forEach(final Iterable<? extends T> iterable, final Callable1<? super T, ?> runnable) {
 	        IteratorFactory.forEach(iterable.iterator(), runnable);
+	 }
+	 
+	 public static <T> LazyCollection<T> filter(final Iterable<? extends T> iterable, final Predicate<? super T> predicate) {
+	        return new LazyCollection<T>() {
+	            public final Iterator<T> iterator() {
+	                return new FilterIterator<>(iterable.iterator(), predicate);
+	            }
+	        };
+	 }
+	 
+	 public static <T> LazyCollection<T> take(final Iterable<? extends T> iterable, final int count) {
+	        return new LazyCollection<T>() {
+	            public final Iterator<T> iterator() {
+	            	//TODO
+	                return null;
+	            }
+	        };
+	 }
+	 
+	 public static <T> LazyCollection<T> takeWhile(final Iterable<? extends T> iterable, final Predicate<? super T> predicate) {
+	        return new LazyCollection<T>() {
+	            public final Iterator<T> iterator() {
+	                return new TakeWhileIterator<>(iterable.iterator(), predicate);
+	            }
+	        };
 	 }
 
 }

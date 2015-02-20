@@ -4,9 +4,11 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import com.lazy.collection.Callable1;
+import com.lazy.collection.Predicate;
 import com.lazy.collection.impl.Callers;
 import com.lazy.collection.iterators.MapIterator;
 import com.lazy.collection.iterators.PeekingIterator;
+import com.lazy.collection.iterators.TakeWhileIterator;
 
 /**
  * 
@@ -48,5 +50,8 @@ public class IteratorFactory {
 	        }
 	        return count;
 	 }
-
+	 
+	 public static <T> Iterator<T> takeWhile(final Iterator<? extends T> iterator, final Predicate<? super T> predicate) {
+	        return new TakeWhileIterator<T>(iterator, predicate);
+	 }
 }

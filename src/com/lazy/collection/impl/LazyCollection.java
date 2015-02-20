@@ -4,10 +4,9 @@ import java.util.AbstractCollection;
 
 import com.lazy.collection.Callable1;
 import com.lazy.collection.First;
+import com.lazy.collection.Predicate;
 import com.lazy.collection.Segment;
 import com.lazy.collection.factory.LazyFactory;
-import com.lazy.primitive.TypeDoubleCallable;
-import com.lazy.primitive.impl.LazyDoubleCollection;
 
 /**
  * 
@@ -52,8 +51,16 @@ public abstract class LazyCollection<T> extends AbstractCollection<T> implements
 		return LazyFactory.map(this, callable);
 	}
 	
-	public LazyDoubleCollection mapToDouble(final TypeDoubleCallable callable){
-		return LazyFactory.mapToDouble(this, callable);
+	public LazyCollection<T> filter(final Predicate<? super T> predicate){
+		return LazyFactory.filter(this, predicate);
+	}
+	
+	public LazyCollection<T> take(final int count){
+		return LazyFactory.take(this, count);
+	}
+	
+	public LazyCollection<T> takeWhile(final Predicate<T> predicate){
+		return LazyFactory.takeWhile(this, predicate);
 	}
 
 }
